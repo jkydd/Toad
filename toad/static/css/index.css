@@ -1,0 +1,16 @@
+nav{
+    background-color: #000088;
+}
+.navbar-brand{
+    color:white;
+    font-size: 30px;
+    font-family: 'Monoton' , sans-serif;
+}
+.nav-link {
+    color:white;
+}
+.navbar-nav button{
+    color:white;
+    border: 1px solid white;
+    margin-left: 20px;
+}
