@@ -16,6 +16,12 @@ nav{
     border: 1px solid white;
     margin-left: 20px;
 }
+.modal-row{
+    margin-left: 0;
+}
+#upload-btn:hover{
+    cursor:pointer;
+}
 .modal-content{
     padding:10px;
 }
