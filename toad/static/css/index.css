@@ -16,6 +16,13 @@ nav{
     border: 1px solid white;
     margin-left: 20px;
 }
+.modal{
+    animation: show 200ms ease-in;
+}
+@keyframes show {
+    from{opacity:0;}
+    to{opacity: 1;}
+}
 .modal-row{
     margin-left: 0;
 }
