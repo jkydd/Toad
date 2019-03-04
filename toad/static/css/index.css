@@ -5,12 +5,45 @@ nav{
     color:white;
     font-size: 30px;
     font-family: 'Monoton' , sans-serif;
+    margin-left: 100px;
 }
 .nav-link {
     color:white;
 }
 .navbar-nav button{
+    margin-right:100px;
     color:white;
     border: 1px solid white;
     margin-left: 20px;
+}
+.modal-content{
+    padding:10px;
+}
+.modal-title{
+    color:#007bff;
+}
+.modal-body{
+    border: 1px dashed black;
+    padding: 35px;
+    text-align: center;
+}
+table{
+    text-align: center;
+}
+
+tbody td label{
+    text-align: center;
+}
+td i:hover{
+    cursor: pointer;
+    color:blue;
+}
+.data{
+    border: solid black 1px;
+    height:400px;
+}
+@media (min-width: 576px){
+    .modal-dialog {
+        max-width: 900px;
+    }
 }
