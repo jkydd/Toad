@@ -18,12 +18,12 @@ $(function () {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    d3.csv("atlas.csv", function(error, cars) {
+    d3.csv("atlas.csv", function(error, frogs) {
 
         // Extract the list of dimensions and create a scale for each.
-        x.domain(dimensions = d3.keys(cars[0]).filter(function(d) {
+        x.domain(dimensions = d3.keys(frogs[0]).filter(function(d) {
             return d !== "name" && (y[d] = d3.scale.linear()
-                .domain(d3.extent(cars, function(p) { return +p[d]; }))
+                .domain(d3.extent(frogs, function(p) { return +p[d]; }))
                 .range([height, 0]));
         }));
 
@@ -31,7 +31,7 @@ $(function () {
         background = svg.append("g")
             .attr("class", "background")
             .selectAll("path")
-            .data(cars)
+            .data(frogs)
             .enter().append("path")
             .attr("d", path);
 
@@ -39,7 +39,7 @@ $(function () {
         foreground = svg.append("g")
             .attr("class", "foreground")
             .selectAll("path")
-            .data(cars)
+            .data(frogs)
             .enter().append("path")
             .attr("d", path);
 
