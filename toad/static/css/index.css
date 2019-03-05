@@ -1,3 +1,4 @@
+/*=================== N    A   V   I   G   A   T   I   O   N==========*/
 nav{
     background-color: #000088;
 }
@@ -16,6 +17,7 @@ nav{
     border: 1px solid white;
     margin-left: 20px;
 }
+/*================ U    P   L   O   A   D       P   A   G   E   ========= */
 .modal{
     animation: show 200ms ease-in;
 }
@@ -60,3 +62,38 @@ td i:hover{
         max-width: 900px;
     }
 }
+/*================== G  R   A   P   H   S   ===========================*/
+svg {
+    font: 10px sans-serif;
+}
+
+.background path {
+        fill: none;
+        stroke: #ddd;
+        shape-rendering: crispEdges;
+    }
+
+.foreground path {
+        fill: none;
+        stroke: steelblue;
+    }
+
+.brush .extent {
+        fill-opacity: .3;
+        stroke: #fff;
+        shape-rendering: crispEdges;
+    }
+
+.axis line,
+.axis path {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+    }
+
+.axis text {
+        text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+        cursor: move;
+    }
+/*======================================================================*/
+
