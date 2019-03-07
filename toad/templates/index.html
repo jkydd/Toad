@@ -59,7 +59,11 @@
                             </div>
                             <!-- Modal body -->
                             <div class="row modal-row">
-                                <div class="modal-body col-lg-8 col-xl-8 col-md-8" id="upload-btn"> Upload</div>
+                                <div class="modal-body col-lg-8 col-xl-8 col-md-8" id="upload-btn">
+                                    <form action="upload.php" method="post" enctype="multipart/form-data">
+                                    <input type="file" name="fileToUpload" id="fileToUpload">
+                                    <input type="submit" value="Upload" name="submit">
+                                </form></div>
                                 <div class="col-lg-4 col-xl-4 col-md-4">
                                     <label class="checkbox-inline"><input type="checkbox" value="">&nbsp Kinematic</label><br>
                                     <label class="checkbox-inline"><input type="checkbox" value="">&nbsp Force Plate</label><br>
@@ -106,7 +110,5 @@
     <h3 id="header"> Parallel Coordinates</h3>
     <div class="row graphs justify-content-center ">
     </div>
-
-
 </body>
 </html>

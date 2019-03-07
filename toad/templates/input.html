@@ -7,8 +7,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 <script src="https://d3js.org/d3.v3.min.js"></script>
-<link rel="stylesheet" href="../static/css/index.css">
-<script src="../static/script/index.js"></script>
+
+
 <form action="upload.php" method="post" enctype="multipart/form-data">
     Select image to upload:
     <input type="file" name="fileToUpload" id="fileToUpload">
@@ -17,7 +17,7 @@
 
 <script>
     let filename ="<?php echo $ufile?>";
-    console.log(filename)
+    console.log("this is the file name" + filename)
 </script>
 
 </body>

@@ -79,7 +79,7 @@ svg {
 .background path {
         fill: none;
         stroke: #ddd;
-        shape-rendering: crispEdges;
+        shape-rendering: auto;
     }
 
 .foreground path {
@@ -90,14 +90,14 @@ svg {
 .brush .extent {
         fill-opacity: .3;
         stroke: #fff;
-        shape-rendering: crispEdges;
+        shape-rendering: auto;
     }
 
 .axis line,
 .axis path {
         fill: none;
         stroke: #000;
-        shape-rendering: crispEdges;
+        shape-rendering: auto;
     }
 
 .axis text {

@@ -1,4 +1,5 @@
 $(function () {
+
     let margin = {top: 30, right: 10, bottom: 10, left: 10},
         width = 1000 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom;
@@ -122,6 +123,4 @@ $(function () {
             }) ? null : "none";
         });
     }
-
-
 });
