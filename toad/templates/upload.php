@@ -87,10 +87,33 @@ else {
                         <!-- Modal body -->
                         <div class="row modal-row">
                             <div class="col-lg-12 col-xl-12 col-md-12">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                                took a galley of type and scrambled it to make a type specimen book. It has survived
-                                not only five centuries, but also the leap into electronic typesetting, remaining
+                                <br>
+                                <h5><b>Summary:</b></h5>
+                                <p>The following plot is a parallel graph consisting of six variables: X position,
+                                    Y position, Z position, Elbow Angle, Humeral Protraction/Retraction, Humeral
+                                    Elevation/Depression. The data was provided by professor Ekstrom, a Wheaton College
+                                    Biology Professor from an experiment testing the differences between a frogs&apos;
+                                    sighted and blinded hops.</p>
+                                <h5><b>File Format:</b></h5>
+                                <p>The uploaded file must be kinematic data provided by Professor Ekstrom, uploaded as a
+                                    CSV file. To create a file from source data, upload a kinematic data file from any of
+                                    the frog&apos;s hops. The file can be of any size and the application will automatically
+                                    clean (scrub) the file to filter any unaccepted data while reading the accepted variables
+                                    for plotting.</p>
+                                <h5><b>Interaction:</b></h5>
+                                <p>Users may select a section of variables by hovering over a variable&apos;s axis, wait for
+                                    the + symbol to show up, then click and drag the section the user wants to select.
+                                    By selecting a section of a variable&apos;s axis, lines that are not selected will turn
+                                    gray while the selected lines will remain green. Selecting multiple variables will
+                                    filter the data so that only hops that satisfy all the selected filters are shown.<br>
+                                    &nbsp; To reset a variable&apos;s selected sections, hover either above or below the selected section,
+                                    wait for the + symbol to show and click. In the case that there is no space on the axis
+                                    to click since the selected section is the entire axis, users will have to reduce
+                                    the size of the selected section size so the cursor may have space to hover over the
+                                    axis directly. This application also supports the option to rearrange the order of the
+                                    axis variables. By hovering over the axis name, such as Z position, users may click and
+                                    drag to rearrange the order of the axes.
+                                <p/>
                             </div>
                         </div>
                         <br>
@@ -127,7 +150,7 @@ else {
                             <table class="table table-bordered manageTable">
                                 <thead>
                                 <tr>
-                                    <th>File Name</th>
+                                    <th>Current File Name</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -142,23 +165,25 @@ else {
         </ul>
     </div>
 </nav>
-<h3 id="header"> Parallel Coordinates of Kinematic Dataset</h3>
+<h3 id="header"></h3>
 <div class="row graphs justify-content-center "></div>
-<div class="stats"></div>
+<br>
+<h2 class="construction" style="color:#116dd2; font-family:Monoton,sans-serif;margin-top:30px; text-align: center"> More Visualization Coming soon!</h2>
 <script>
     $(function () {
         let upload_status = "<?php echo $uploadOk;?>";
         console.log("1:uploaded 0:not uploaded---> "+ upload_status);
-        let bool_status = "<?php echo $check;?>";
         let fileName = "<?php echo $ufile;?>";
         console.log("csv filename: " + fileName);
         if (upload_status === 0){
-            console.log("this shit is confusing!")
+            alert("file upload failed")
         }
         else{
             graph(fileName);
             tableInfo(fileName);
         }
+        $("#header").html("Parallel Coordinates for " + fileName)
+
     });
 
 

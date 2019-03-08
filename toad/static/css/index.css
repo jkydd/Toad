@@ -75,7 +75,12 @@ td i:hover{
         max-width: 900px;
     }
 }
-
+button, input {
+    overflow: visible;
+    background: #0ab394;
+    padding: 10px;
+    border-radius: 25px;
+}
 /*================== G  R   A   P   H   S   ===========================*/
 #header{
     text-align: center;
