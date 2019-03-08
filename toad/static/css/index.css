@@ -44,6 +44,9 @@ nav{
 .modal-row{
     margin-left: 0;
 }
+.upload-modal{
+    margin-bottom: 30px;
+}
 #upload-btn:hover{
     cursor:pointer;
 }
@@ -58,13 +61,7 @@ nav{
     padding: 35px;
     text-align: center;
 }
-table{
-    text-align: center;
-}
 
-tbody td label{
-    text-align: center;
-}
 td i:hover{
     cursor: pointer;
     color:blue;
@@ -78,6 +75,7 @@ td i:hover{
         max-width: 900px;
     }
 }
+
 /*================== G  R   A   P   H   S   ===========================*/
 #header{
     text-align: center;

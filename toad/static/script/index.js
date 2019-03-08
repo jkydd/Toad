@@ -17,7 +17,7 @@ $(function () {
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    let defaultName = "uploads/default.csv";
+    let defaultName = "default.csv";
     console.log("this is the default name: " + defaultName)
     d3.csv(defaultName, function(error, frogs) {
 

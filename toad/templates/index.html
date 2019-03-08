@@ -34,7 +34,7 @@
                                 <button type="button" class="close" style="color:black" data-dismiss="modal">&times;</button>
                             </div>
                             <!-- Modal body -->
-                            <div class="row modal-row">
+                            <div class="row modal-row upload-modal">
                                 <div class="col-lg-12 col-xl-12 col-md-12">
                                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
                                     has been the industry's standard dummy text ever since the 1500s, when an unknown printer
@@ -58,14 +58,14 @@
                                 <button type="button" class="close" style="color:black" data-dismiss="modal">&times;</button>
                             </div>
                             <!-- Modal body -->
-                            <div class="row modal-row">
+                            <div class="row modal-row" style="margin-bottom:30px;">
                                 <div class="modal-body col-lg-8 col-xl-8 col-md-8" id="upload-btn">
                                     <form action="upload.php" method="post" enctype="multipart/form-data">
                                     <input type="file" name="fileToUpload" id="fileToUpload">
-                                    <input type="submit" value="Upload" name="submit">
+                                    <input type="submit" value="Generate" name="submit">
                                 </form></div>
                                 <div class="col-lg-4 col-xl-4 col-md-4">
-                                    <label class="checkbox-inline"><input type="checkbox" value="">&nbsp Kinematic</label><br>
+                                    <label class="checkbox-inline "><input type="checkbox" value="" checked>&nbsp Kinematic</label><br>
                                     <label class="checkbox-inline disabled"><input type="checkbox" value="">&nbsp Force Plate</label><br>
                                     <label class="checkbox-inline disabled"><input type="checkbox" value="">&nbsp  Timing of Toad hops</label>
                                 </div>
@@ -81,5 +81,7 @@
     <h3 id="header"> Parallel Coordinates (Default)</h3>
     <div class="row graphs justify-content-center ">
     </div>
+
+    <h2 class="construction" style="color:#116dd2; font-family:Monoton,sans-serif;"> More Visualization Coming soon!</h2>
 </body>
 </html>

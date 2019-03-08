@@ -1,9 +1,25 @@
-
 <?php
+
+//===================================================================================
+// This is necessary so that the system deletes all the files that previously exist.
+$folder = 'uploads';
+//Get a list of all of the file names in the folder.
+$files = glob($folder . '/*');
+
+//Loop through the file list.
+foreach($files as $file){
+    //Make sure that this is a file and not a directory.
+    if(is_file($file)){
+        //Use the unlink function to delete the file.
+        unlink($file);
+    }
+}
+//=====================================================================================
 $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
 
 // Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
@@ -19,26 +35,27 @@ if(isset($_POST["submit"])) {
 // Check if file already exists
 if (file_exists($target_file)) {
     $uploadOk = 0;
+    echo "<script type='text/javascript'>alert('File already exist!');</script>";
 }
 // Allow certain file formats
 if($imageFileType != "csv"  ) {
     //echo "Sorry, only xml and csv files are allowed.";
     $uploadOk = 0;
+    echo "<script type='text/javascript'>alert('File is not a csv');</script>";
 }
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
-    //echo "Sorry, your file was not uploaded.";
-// if everything is ok, try to upload file
-} else {
+    echo "<script type='text/javascript'>alert('File not uploaded');</script>";
+}
+else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
         $ufile = basename( $_FILES["fileToUpload"]["name"]);
-        //echo "The fname is: ". $ufile;
     } else {
-        echo "Sorry, there was an error uploading your file.";
+        echo "<script type='text/javascript'>alert('File not uploaded');</script>";
     }
 }
 ?>
+<!--===============================================================================-->
 <!DOCTYPE html>
 <html>
 <body>
@@ -96,10 +113,10 @@ if ($uploadOk == 0) {
                             <div class="modal-body col-lg-8 col-xl-8 col-md-8" id="upload-btn">
                                 <form action="upload.php" method="post" enctype="multipart/form-data">
                                     <input type="file" name="fileToUpload" id="fileToUpload">
-                                    <input type="submit" value="Upload" name="submit">
+                                    <input type="submit" value="Generate" name="submit">
                                 </form></div>
                             <div class="col-lg-4 col-xl-4 col-md-4">
-                                <label class="checkbox-inline"><input type="checkbox" value="">&nbsp Kinematic</label><br>
+                                <label class="checkbox-inline"><input type="checkbox" value="" checked>&nbsp Kinematic</label><br>
                                 <label class="checkbox-inline disabled"><input type="checkbox" value="">&nbsp Force Plate</label><br>
                                 <label class="checkbox-inline disabled"><input type="checkbox" value="">&nbsp  Timing of Toad hops</label>
                             </div>
@@ -131,12 +148,17 @@ if ($uploadOk == 0) {
 <script>
     $(function () {
         let upload_status = "<?php echo $uploadOk;?>";
-        console.log("this is the status of the upload: "+ upload_status);
+        console.log("1:uploaded 0:not uploaded---> "+ upload_status);
+        let bool_status = "<?php echo $check;?>";
         let fileName = "<?php echo $ufile;?>";
         console.log("csv filename: " + fileName);
-        graph(fileName);
-        tableInfo(fileName);
-        //basicStats(fileName);
+        if (upload_status === 0){
+            console.log("this shit is confusing!")
+        }
+        else{
+            graph(fileName);
+            tableInfo(fileName);
+        }
     });
 
 
@@ -182,7 +204,7 @@ if ($uploadOk == 0) {
 
             // Extract the list of dimensions and create a scale for each.
             x.domain(dimensions = d3.keys(frogs[0]).filter(function(d) {
-                return d !== "name" && d.indexOf("pt2_X") === -1 && d.indexOf("pt2_Y") === -1  && d.indexOf("pt2_Z") === -1 && d.indexOf("pt3_X") === -1 && d.indexOf("pt3_Y") === -1 && d.indexOf("pt3_Z") === -1 && d.indexOf("pt4_X") === -1 && d.indexOf("pt4_Y") === -1 && d.indexOf("pt4_Z") === -1 && d.indexOf("pt5_X") === -1&& d.indexOf("pt5_Y") === -1 && d.indexOf("pt5_Z") === -1 && d.indexOf("pt6_X") === -1 && d.indexOf("pt6_Y") === -1 && d.indexOf("pt6_Z") === -1 && d.indexOf("ElbowLa") === -1 && d.indexOf("ElbowLb") === -1 && d.indexOf("tElbowLc") === -1 && d.indexOf("ElbowAng") === -1 && d.indexOf("Pt5 - Pt2 (x,z)") === -1 && d.indexOf("Pt1 - Pt2 (x,z)") === -1 && d.indexOf("Pt5 - Pt1 (x,z)") === -1 && d.indexOf("HPR Comp Ang") && d.indexOf("Pt3 - Pt5 (y,z)")&& d.indexOf("Pt2 - Pt3 (y,z)")&& d.indexOf("Pt5 - Pt2 (y,z)")=== -1 &&(y[d] = d3.scale.linear()
+                return d !== "name" && d.indexOf("pt2_X") === -1 && d.indexOf("pt2_Y") === -1  && d.indexOf("pt2_Z") === -1 && d.indexOf("pt3_X") === -1 && d.indexOf("pt3_Y") === -1 && d.indexOf("pt3_Z") === -1 && d.indexOf("pt4_X") === -1 && d.indexOf("pt4_Y") === -1 && d.indexOf("pt4_Z") === -1 && d.indexOf("pt5_X") === -1&& d.indexOf("pt5_Y") === -1 && d.indexOf("pt5_Z") === -1 && d.indexOf("pt6_X") === -1 && d.indexOf("pt6_Y") === -1 && d.indexOf("pt6_Z") === -1 && d.indexOf("ElbowLa") === -1 && d.indexOf("ElbowLb") === -1 && d.indexOf("Midline (1-2)") === -1 && d.indexOf("Pt5 - Pt1") === -1 && d.indexOf("Pt3 - Pt5") === -1 && d.indexOf("Pt2 - Pt3") === -1 && d.indexOf("Pt5 - Pt2") === -1 &&d.indexOf("ElbowLc") === -1 && d.indexOf("ElbowAng") === -1 && d.indexOf("Pt5 - Pt2 (x,z)") === -1 && d.indexOf("Pt1 - Pt2 (x,z)") === -1 && d.indexOf("Pt5 - Pt1 (x,z)") === -1 && d.indexOf("HPR Comp Ang") && d.indexOf("Pt3 - Pt5 (y,z)")&& d.indexOf("Pt2 - Pt3 (y,z)")&& d.indexOf("Pt5 - Pt2 (y,z)")=== -1 &&(y[d] = d3.scale.linear()
                     .domain(d3.extent(frogs, function(p) { return +p[d]; }))
                     .range([height, 0]));
             }));
