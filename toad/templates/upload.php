@@ -18,12 +18,10 @@ if(isset($_POST["submit"])) {
 }
 // Check if file already exists
 if (file_exists($target_file)) {
-    //echo "Sorry, file already exists.";
     $uploadOk = 0;
 }
-
 // Allow certain file formats
-if($imageFileType != "xml" && $imageFileType != "csv"  ) {
+if($imageFileType != "csv"  ) {
     //echo "Sorry, only xml and csv files are allowed.";
     $uploadOk = 0;
 }
@@ -44,6 +42,7 @@ if ($uploadOk == 0) {
 <!DOCTYPE html>
 <html>
 <body>
+<link href="https://fonts.googleapis.com/css?family=Monoton|ZCOOL+KuaiLe|Major+Mono+Display|Slabo+27px|Staatliches|Patrick+Hand" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -52,18 +51,97 @@ if ($uploadOk == 0) {
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <link rel="stylesheet" href="static/css/index.css">
 
-<form action="upload.php" method="get" enctype="multipart/form-data">
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Upload Image" name="submit">
-</form>
+<nav class="navbar navbar-expand-lg bg-primary">
+    <a class="navbar-brand" href="#">TOAD++</a>
+    <button id="open" class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item about"><button data-toggle="modal" data-target="#about" class="nav-link">About</button></li>
+            <div class="modal " id="about">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">About</h4>
+                            <button type="button" class="close" style="color:black" data-dismiss="modal">&times;</button>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="row modal-row">
+                            <div class="col-lg-12 col-xl-12 col-md-12">
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                                has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+                                took a galley of type and scrambled it to make a type specimen book. It has survived
+                                not only five centuries, but also the leap into electronic typesetting, remaining
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+
+            <!--================================= U P L O A D   M O D A L  ======================================-->
+            <button type="button" class="btn btn-primary upload" data-toggle="modal" data-target="#myModal">Upload</button>
+            <div class="modal " id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Upload / Manage</h4>
+                            <button type="button" class="close" style="color:black" data-dismiss="modal">&times;</button>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="row modal-row">
+                            <div class="modal-body col-lg-8 col-xl-8 col-md-8" id="upload-btn">
+                                <form action="upload.php" method="post" enctype="multipart/form-data">
+                                    <input type="file" name="fileToUpload" id="fileToUpload">
+                                    <input type="submit" value="Upload" name="submit">
+                                </form></div>
+                            <div class="col-lg-4 col-xl-4 col-md-4">
+                                <label class="checkbox-inline"><input type="checkbox" value="">&nbsp Kinematic</label><br>
+                                <label class="checkbox-inline disabled"><input type="checkbox" value="">&nbsp Force Plate</label><br>
+                                <label class="checkbox-inline disabled"><input type="checkbox" value="">&nbsp  Timing of Toad hops</label>
+                            </div>
+                        </div>
+
+                        <!-- footer -->
+                        <div class="modal-footer">
+                            <table class="table table-bordered manage">
+                                <thead>
+                                <tr>
+                                    <th>File Name</th>
+                                    <th>Delete</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--=================================================================================================-->
+        </ul>
+    </div>
+</nav>
 <h3 id="header"> Parallel Coordinates</h3>
 <div class="row graphs justify-content-center ">
 </div>
 <script>
     $(function () {
+        let upload_status = "<?php echo $uploadOk;?>";
+        console.log("this is the status of the upload: "+ upload_status);
+        graph();
+    });
+
+    /***
+     * This is the d3 code to draw the parallel graph.
+     */
+    function graph(){
         let fileName = "<?php echo $ufile;?>";
         console.log("csv filename: " + fileName);
-
         let margin = {top: 30, right: 10, bottom: 10, left: 10},
             width = 1000 - margin.left - margin.right,
             height = 600 - margin.top - margin.bottom;
@@ -88,7 +166,7 @@ if ($uploadOk == 0) {
 
             // Extract the list of dimensions and create a scale for each.
             x.domain(dimensions = d3.keys(frogs[0]).filter(function(d) {
-                return d !== "name" && (y[d] = d3.scale.linear()
+                return d !== "name" && d.indexOf("pt2_X") === -1 && d.indexOf("pt2_Y") === -1  && d.indexOf("pt2_Z") === -1 &&(y[d] = d3.scale.linear()
                     .domain(d3.extent(frogs, function(p) { return +p[d]; }))
                     .range([height, 0]));
             }));
@@ -186,7 +264,7 @@ if ($uploadOk == 0) {
                 }) ? null : "none";
             });
         }
-    });
+    }
 </script>
 
 </body>

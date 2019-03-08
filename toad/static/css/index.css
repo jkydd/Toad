@@ -21,6 +21,18 @@ nav{
     background: transparent;
     border:0;
 }
+.disabled{
+    pointer-events:none;
+    color:#b9b9b9;
+}
+.graphs{
+    width: 1100px;
+    border: 1px solid black;
+    display: block;
+    margin: 0 auto;
+    padding: 50px 10px 50px 50px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
 /*================ U    P   L   O   A   D       P   A   G   E   ========= */
 .modal{
     animation: show 200ms ease-in;

@@ -1,5 +1,4 @@
 $(function () {
-
     let margin = {top: 30, right: 10, bottom: 10, left: 10},
         width = 1000 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom;
@@ -18,8 +17,9 @@ $(function () {
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    d3.csv("atlas.csv", function(error, frogs) {
+    let defaultName = "uploads/default.csv";
+    console.log("this is the default name: " + defaultName)
+    d3.csv(defaultName, function(error, frogs) {
 
         // Extract the list of dimensions and create a scale for each.
         x.domain(dimensions = d3.keys(frogs[0]).filter(function(d) {
