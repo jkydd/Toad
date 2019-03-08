@@ -107,11 +107,10 @@ if ($uploadOk == 0) {
 
                         <!-- footer -->
                         <div class="modal-footer">
-                            <table class="table table-bordered manage">
+                            <table class="table table-bordered manageTable">
                                 <thead>
                                 <tr>
                                     <th>File Name</th>
-                                    <th>Delete</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -126,22 +125,39 @@ if ($uploadOk == 0) {
         </ul>
     </div>
 </nav>
-<h3 id="header"> Parallel Coordinates</h3>
-<div class="row graphs justify-content-center ">
-</div>
+<h3 id="header"> Parallel Coordinates of Kinematic Dataset</h3>
+<div class="row graphs justify-content-center "></div>
+<div class="stats"></div>
 <script>
     $(function () {
         let upload_status = "<?php echo $uploadOk;?>";
         console.log("this is the status of the upload: "+ upload_status);
-        graph();
+        let fileName = "<?php echo $ufile;?>";
+        console.log("csv filename: " + fileName);
+        graph(fileName);
+        tableInfo(fileName);
+        //basicStats(fileName);
     });
 
+
+
+    /***
+     * display the file name and the delete option for the file.
+     */
+    function tableInfo(name){
+        let tBody = $(".manageTable > tbody")[0];
+
+        //Add Row.
+        let row = tBody.insertRow(-1);
+
+        //Add Name cell.
+        let cell = $(row.insertCell(-1));
+        cell.html(name);
+    }
     /***
      * This is the d3 code to draw the parallel graph.
      */
-    function graph(){
-        let fileName = "<?php echo $ufile;?>";
-        console.log("csv filename: " + fileName);
+    function graph(fileName){
         let margin = {top: 30, right: 10, bottom: 10, left: 10},
             width = 1000 - margin.left - margin.right,
             height = 600 - margin.top - margin.bottom;
@@ -166,7 +182,7 @@ if ($uploadOk == 0) {
 
             // Extract the list of dimensions and create a scale for each.
             x.domain(dimensions = d3.keys(frogs[0]).filter(function(d) {
-                return d !== "name" && d.indexOf("pt2_X") === -1 && d.indexOf("pt2_Y") === -1  && d.indexOf("pt2_Z") === -1 &&(y[d] = d3.scale.linear()
+                return d !== "name" && d.indexOf("pt2_X") === -1 && d.indexOf("pt2_Y") === -1  && d.indexOf("pt2_Z") === -1 && d.indexOf("pt3_X") === -1 && d.indexOf("pt3_Y") === -1 && d.indexOf("pt3_Z") === -1 && d.indexOf("pt4_X") === -1 && d.indexOf("pt4_Y") === -1 && d.indexOf("pt4_Z") === -1 && d.indexOf("pt5_X") === -1&& d.indexOf("pt5_Y") === -1 && d.indexOf("pt5_Z") === -1 && d.indexOf("pt6_X") === -1 && d.indexOf("pt6_Y") === -1 && d.indexOf("pt6_Z") === -1 && d.indexOf("ElbowLa") === -1 && d.indexOf("ElbowLb") === -1 && d.indexOf("tElbowLc") === -1 && d.indexOf("ElbowAng") === -1 && d.indexOf("Pt5 - Pt2 (x,z)") === -1 && d.indexOf("Pt1 - Pt2 (x,z)") === -1 && d.indexOf("Pt5 - Pt1 (x,z)") === -1 && d.indexOf("HPR Comp Ang") && d.indexOf("Pt3 - Pt5 (y,z)")&& d.indexOf("Pt2 - Pt3 (y,z)")&& d.indexOf("Pt5 - Pt2 (y,z)")=== -1 &&(y[d] = d3.scale.linear()
                     .domain(d3.extent(frogs, function(p) { return +p[d]; }))
                     .range([height, 0]));
             }));
