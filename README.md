@@ -6,9 +6,9 @@
 
 ### General Description 
 The toad data currently consist of 3 main datasets: 
-Timing variables: from video recorded of toads hopping (i.e. when the hop started, when the toad landed, etc).  
-3D movement data:  (x,y,z coordinates) for specific points of interest on each toad  (aka, kinematic data).  
-3D force data: tells the amount of force in the normal (vertical), fore-aft (front-back), and lateral (side-to-side) directions that are exerted when a toad lands.
+1. Timing variables: from video recorded of toads hopping (i.e. when the hop started, when the toad landed, etc).  
+2. 3D movement data:  (x,y,z coordinates) for specific points of interest on each toad  (aka, kinematic data).  
+3. 3D force data: tells the amount of force in the normal (vertical), fore-aft (front-back), and lateral (side-to-side) directions that are exerted when a toad lands.
 
 The software allows users to upload their own data. When the user generates the visualization for the data, there are three different graphs displayed. The first graph is the jump of the frog using 3D movement data. This allows the user to see the position of the frog in the air over time. The user can also hover on the graph to see the exact X and Y position of the frog at a particular time. 
 
