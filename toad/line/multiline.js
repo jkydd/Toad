@@ -1,6 +1,6 @@
 function makeLineChart(dataset, xName, yObjs, axisLables) {
-    let chartObj = {};
-    let color = d3.scale.category10();
+    var chartObj = {};
+    var color = d3.scale.category10();
     chartObj.xAxisLable = axisLables.xAxis;
     chartObj.yAxisLable = axisLables.yAxis;
     /*
@@ -22,27 +22,26 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
             return d[column];
         };
     }
-
 // Object instead of array
     chartObj.yFuncts = [];
-    for (let y  in yObjs) {
+    for (var y  in yObjs) {
         yObjs[y].name = y;
         yObjs[y].yFunct = getYFn(yObjs[y].column); //Need this  list for the ymax function
         chartObj.yFuncts.push(yObjs[y].yFunct);
     }
-//Shouldn't use this function since we dont need to round it off.
+
 //Formatter functions for the axes
-    /*chartObj.formatAsNumber = d3.format(".0f");
-    chartObj.formatAsDecimal = d3.format(".2f");
-    chartObj.formatAsCurrency = d3.format("$.2f");
+    chartObj.formatAsNumber = d3.format(".3f");
+    chartObj.formatAsDecimal = d3.format(".3f");
+    chartObj.formatAsCurrency = d3.format("$.3f");
     chartObj.formatAsFloat = function (d) {
         if (d % 1 !== 0) {
-            return d3.format(".2f")(d);
+            return d3.format(".3f")(d);
         } else {
-            return d3.format(".0f")(d);
+            return d3.format(".3f")(d);
         }
 
-    };*/
+    };
 
     chartObj.xFormatter = chartObj.formatAsNumber;
     chartObj.yFormatter = chartObj.formatAsFloat;
@@ -72,7 +71,7 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
             return chartObj.yScale(yObjs[yObj].yFunct(d));
         };
     }
-    for (let yObj in yObjs) {
+    for (var yObj in yObjs) {
         yObjs[yObj].line = d3.svg.line().interpolate("cardinal").x(function (d) {
             return chartObj.xScale(chartObj.xFunct(d));
         }).y(getYScaleFn(yObj));
@@ -101,7 +100,7 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
         chartObj.svg.select('.y.axis .label').attr("x", -chartObj.height / 2);
 
         /* Force D3 to recalculate and update the line */
-        for (let y  in yObjs) {
+        for (var y  in yObjs) {
             yObjs[y].path.attr("d", yObjs[y].line);
         }
 
@@ -131,7 +130,7 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
         chartObj.svg = chartObj.chartDiv.append("svg").attr("class", "chart-area").attr("width", chartObj.width + (chartObj.margin.left + chartObj.margin.right)).attr("height", chartObj.height + (chartObj.margin.top + chartObj.margin.bottom)).append("g").attr("transform", "translate(" + chartObj.margin.left + "," + chartObj.margin.top + ")");
 
         // Draw Lines
-        for (let y  in yObjs) {
+        for (var y  in yObjs) {
             yObjs[y].path = chartObj.svg.append("path").datum(chartObj.data).attr("class", "line").attr("d", yObjs[y].line).style("stroke", color(y)).attr("data-series", y).on("mouseover", function () {
                 focus.style("display", null);
             }).on("mouseout", function () {
@@ -146,9 +145,9 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
         chartObj.svg.append("g").attr("class", "y axis").call(chartObj.yAxis).append("text").attr("class", "label").attr("transform", "rotate(-90)").attr("y", -42).attr("x", -chartObj.height / 2).attr("dy", ".71em").style("text-anchor", "middle").text(chartObj.yAxisLable);
 
         //Draw tooltips
-        let focus = chartObj.svg.append("g").attr("class", "focus").style("display", "none");
+        var focus = chartObj.svg.append("g").attr("class", "focus").style("display", "none");
 
-        for (let y  in yObjs) {
+        for (var y  in yObjs) {
             yObjs[y].tooltip = focus.append("g");
             yObjs[y].tooltip.append("circle").attr("r", 5);
             yObjs[y].tooltip.append("rect").attr("x", 8).attr("y","-5").attr("width",22).attr("height",'0.75em');
@@ -161,8 +160,8 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
         focus.append("line").attr("class", "focus line").attr("y1", 0).attr("y2", chartObj.height);
 
         //Draw legend
-        let legend = chartObj.mainDiv.append('div').attr("class", "legend");
-        for (let y  in yObjs) {
+        var legend = chartObj.mainDiv.append('div').attr("class", "legend");
+        for (var y  in yObjs) {
             series = legend.append('div');
             series.append('div').attr("class", "series-marker").style("background-color", color(y));
             series.append('p').text(y);
@@ -178,9 +177,9 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
 
         return chartObj;
         function mousemove() {
-            let x0 = chartObj.xScale.invert(d3.mouse(this)[0]), i = chartObj.bisectYear(dataset, x0, 1), d0 = chartObj.data[i - 1], d1 = chartObj.data[i];
+            var x0 = chartObj.xScale.invert(d3.mouse(this)[0]), i = chartObj.bisectYear(dataset, x0, 1), d0 = chartObj.data[i - 1], d1 = chartObj.data[i];
             try {
-                let d = x0 - chartObj.xFunct(d0) > chartObj.xFunct(d1) - x0 ? d1 : d0;
+                var d = x0 - chartObj.xFunct(d0) > chartObj.xFunct(d1) - x0 ? d1 : d0;
             } catch (e) { return;}
             minY = chartObj.height;
             for (let y  in yObjs) {
@@ -188,9 +187,8 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
                 yObjs[y].tooltip.select("text").text(chartObj.yFormatter(yObjs[y].yFunct(d)));
                 minY = Math.min(minY, chartObj.yScale(yObjs[y].yFunct(d)));
             }
-
             focus.select(".focus.line").attr("transform", "translate(" + chartObj.xScale(chartObj.xFunct(d)) + ")").attr("y1", minY);
-            focus.select(".focus.year").text("Year: " + chartObj.xFormatter(chartObj.xFunct(d)));
+            focus.select(".focus.year").text("Time: " + chartObj.xFormatter(chartObj.xFunct(d)));
         }
     };
     return chartObj;
