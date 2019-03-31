@@ -201,7 +201,7 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
             }
 
             focus.select(".focus.line").attr("transform", "translate(" + chartObj.xScale(chartObj.xFunct(d)) + ")").attr("y1", minY);
-            focus.select(".focus.year").text("Newtons: " + (chartObj.xFormatter(chartObj.xFunct(d))));
+            focus.select(".focus.year").text("Time in Milliseconds: " + (chartObj.xFormatter(chartObj.xFunct(d))));
         }
 
     };
