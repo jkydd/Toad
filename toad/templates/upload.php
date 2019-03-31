@@ -1,5 +1,4 @@
 <?php
-
 //===================================================================================
 // This is necessary so that the system deletes all the files that previously exist.
 $folder = 'uploads';
@@ -50,7 +49,8 @@ if ($uploadOk == 0) {
 else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         $ufile = basename( $_FILES["fileToUpload"]["name"]);
-    } else {
+    }
+    else {
         echo "<script type='text/javascript'>alert('File not uploaded');</script>";
     }
 }
@@ -139,9 +139,9 @@ else {
                                     <input type="submit" value="Generate" name="submit">
                                 </form></div>
                             <div class="col-lg-4 col-xl-4 col-md-4">
-                                <label class="checkbox-inline"><input type="checkbox" value="" checked>&nbsp Kinematic</label><br>
-                                <label class="checkbox-inline disabled"><input type="checkbox" value="">&nbsp Force Plate</label><br>
-                                <label class="checkbox-inline disabled"><input type="checkbox" value="">&nbsp  Timing of Toad hops</label>
+                                <label class="checkbox-inline"><input type="checkbox" value="">&nbsp Kinematic</label><br>
+                                <label class="checkbox-inline"><input type="checkbox" value="">&nbsp Force Plate</label><br>
+                                <label class="checkbox-inline"><input type="checkbox" value="">&nbsp  Timing of Toad hops</label>
                             </div>
                         </div>
 

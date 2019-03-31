@@ -123,4 +123,5 @@ $(function () {
             }) ? null : "none";
         });
     }
+    $("#modified").html(document.lastModified);
 });
