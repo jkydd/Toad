@@ -50,14 +50,16 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
     chartObj.bisectYear = d3.bisector(chartObj.xFunct).left; //< Can be overridden in definition
 
 //Create scale functions
-    chartObj.xScale = d3.scale.linear().range([0, chartObj.width]).domain(d3.extent(chartObj.data, chartObj.xFunct)); //< Can be overridden in definition
+
+    chartObj.xScale = d3.scale.linear().range([-2, chartObj.width]).domain(d3.extent(chartObj.data, chartObj.xFunct)); //< Can be overridden in definition
 
 // Get the max of every yFunct
     chartObj.max = function (fn) {
         return d3.max(chartObj.data, fn);
     };
-    chartObj.yScale = d3.scale.linear().range([chartObj.height, 0]).domain([0, d3.max(chartObj.yFuncts.map(chartObj.max))]);
-
+    console.log("Height: ",chartObj.height);
+    chartObj.yScale = d3.scale.linear().range([chartObj.height, 0]).domain([-1, d3.max(chartObj.yFuncts.map(chartObj.max))]);
+    console.log();
     chartObj.formatAsYear = d3.format("");
 
 //Create axis
