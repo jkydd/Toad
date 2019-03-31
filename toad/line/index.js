@@ -14,7 +14,11 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
     chartObj.height = 480 - chartObj.margin.top - chartObj.margin.bottom;
 
 // So we can pass the x and y as strings when creating the function
-    chartObj.xFunct = function(d){return d[xName]};
+    chartObj.xFunct = function(d){
+        //console.log(d[xName]);
+        return d[xName]
+    };
+
     //console.log("chartObj.xFunct",chartObj.xFunct);
 // For each yObjs argument, create a yFunction
     function getYFn(column) {
@@ -28,6 +32,7 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
     for (let y  in yObjs) {
         yObjs[y].name = y;
         yObjs[y].yFunct = getYFn(yObjs[y].column); //Need this  list for the ymax function
+
         chartObj.yFuncts.push(yObjs[y].yFunct);
     }
     console.log(yObjs);
@@ -175,6 +180,7 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
         }
 
         // Overlay to capture hover
+
         chartObj.svg.append("rect").attr("class", "overlay").attr("width", chartObj.width).attr("height", chartObj.height).on("mouseover", function () {
             focus.style("display", null);
         }).on("mouseout", function () {
@@ -185,7 +191,7 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
         function mousemove() {
             let x0 = chartObj.xScale.invert(d3.mouse(this)[0]), i = chartObj.bisectYear(dataset, x0, 1), d0 = chartObj.data[i - 1], d1 = chartObj.data[i];
             try {
-                let d = x0 - chartObj.xFunct(d0) > chartObj.xFunct(d1) - x0 ? d1 : d0;
+                var d = x0 - chartObj.xFunct(d0) > chartObj.xFunct(d1) - x0 ? d1 : d0;
             } catch (e) { return;}
             minY = chartObj.height;
             for (var y  in yObjs) {
@@ -195,7 +201,7 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
             }
 
             focus.select(".focus.line").attr("transform", "translate(" + chartObj.xScale(chartObj.xFunct(d)) + ")").attr("y1", minY);
-            focus.select(".focus.year").text("Year: " + chartObj.xFormatter(chartObj.xFunct(d)));
+            focus.select(".focus.year").text("Newtons: " + (chartObj.xFormatter(chartObj.xFunct(d))));
         }
 
     };

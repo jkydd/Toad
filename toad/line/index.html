@@ -14,7 +14,7 @@
 
     d3.csv('Fortuna_tn11.csv', function(error, data) {
         data.forEach(function (d) {
-            d.timing = +d.timing;
+            d.timing = +d.timing*5;
             d.foreaft = +d.foreaft;
             d.lateral = +d.lateral;
             d.normal = +d.normal;
@@ -25,7 +25,7 @@
             'Fore-aft': {column: 'foreaft'},
             'Lateral': {column: 'lateral'},
             'Normal': {column: 'normal'},
-        }, {xAxis: 'Time', yAxis: 'Newtons'});
+        }, {xAxis: 'Time in Milliseconds', yAxis: 'Newtons'});
 
         chart.bind("#chart-line1");
 
