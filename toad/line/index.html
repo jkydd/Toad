@@ -13,20 +13,31 @@
 <script type="text/javascript">
     d3.csv('multiline_data.csv', function(error, data) {
         data.forEach(function (d) {
-            d.year = +d.year;
-            d.variableA = +d.variableA;
-            d.variableB = +d.variableB;
-            d.variableC = +d.variableC;
+            d.Year = +d.Year;
+            d.Atlas_1 = +d.Atlas_1;
+            d.Atlas_2 = +d.Atlas_2;
+            d.Atlas_3 = +d.Atlas_3;
+            d.Atlas_4 = +d.Atlas_4;
+            d.Atlas_5 = +d.Atlas_5;
+            d.Atlas_6 = +d.Atlas_6;
+            d.Atlas_7 = +d.Atlas_7;
+            d.Atlas_8 = +d.Atlas_8;
+            d.Atlas_9 = +d.Atlas_9;
         });
 
-        let chart = makeLineChart(data, 'year', {
-            'Variable A': {column: 'variableA'},
-            'Variable B': {column: 'variableB'},
-            'Variable C': {column: 'variableC'},
-        }, {xAxis: 'Years', yAxis: 'Amount'});
+        let chart = makeLineChart(data, 'Year', {
+            'Atlas 1': {column: 'Atlas_1'},
+            'Atlas 2': {column: 'Atlas_2'},
+            'Atlas 3': {column: 'Atlas_3'},
+            'Atlas 4': {column: 'Atlas_4'},
+            'Atlas 5': {column: 'Atlas_5'},
+            'Atlas 6': {column: 'Atlas_6'},
+            'Atlas 7': {column: 'Atlas_7'},
+            'Atlas 8': {column: 'Atlas_8'},
+            'Atlas 9': {column: 'Atlas_9'},
+        }, {xAxis: 'Time in milli-second', yAxis: 'Distance in millimeters'});
         chart.bind("#chart-line1");
         chart.render();
-
     });
 </script>
 <script src="index.js" charset="utf-8"></script>

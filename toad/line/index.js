@@ -30,9 +30,9 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
         yObjs[y].yFunct = getYFn(yObjs[y].column); //Need this  list for the ymax function
         chartObj.yFuncts.push(yObjs[y].yFunct);
     }
-
+//Shouldn't use this function since we dont need to round it off.
 //Formatter functions for the axes
-    chartObj.formatAsNumber = d3.format(".0f");
+    /*chartObj.formatAsNumber = d3.format(".0f");
     chartObj.formatAsDecimal = d3.format(".2f");
     chartObj.formatAsCurrency = d3.format("$.2f");
     chartObj.formatAsFloat = function (d) {
@@ -42,7 +42,7 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
             return d3.format(".0f")(d);
         }
 
-    };
+    };*/
 
     chartObj.xFormatter = chartObj.formatAsNumber;
     chartObj.yFormatter = chartObj.formatAsFloat;
