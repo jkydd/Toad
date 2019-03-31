@@ -15,7 +15,7 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
 
 // So we can pass the x and y as strings when creating the function
     chartObj.xFunct = function(d){return d[xName]};
-
+    //console.log("chartObj.xFunct",chartObj.xFunct);
 // For each yObjs argument, create a yFunction
     function getYFn(column) {
         return function (d) {
@@ -30,7 +30,7 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
         yObjs[y].yFunct = getYFn(yObjs[y].column); //Need this  list for the ymax function
         chartObj.yFuncts.push(yObjs[y].yFunct);
     }
-
+    console.log(yObjs);
 //Formatter functions for the axes
     chartObj.formatAsNumber = d3.format(".0f");
     chartObj.formatAsDecimal = d3.format(".2f");
@@ -48,7 +48,7 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
     chartObj.yFormatter = chartObj.formatAsFloat;
 
     chartObj.bisectYear = d3.bisector(chartObj.xFunct).left; //< Can be overridden in definition
-
+    //console.log("chartObj.bisectYear: ",d3.bisector(chartObj.xFunct).left);
 //Create scale functions
 
     chartObj.xScale = d3.scale.linear().range([-2, chartObj.width]).domain(d3.extent(chartObj.data, chartObj.xFunct)); //< Can be overridden in definition
@@ -57,8 +57,11 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
     chartObj.max = function (fn) {
         return d3.max(chartObj.data, fn);
     };
+    chartObj.min = function (fn) {
+        return d3.min(chartObj.data, fn);
+    };
     console.log("Height: ",chartObj.height);
-    chartObj.yScale = d3.scale.linear().range([chartObj.height, 0]).domain([-1, d3.max(chartObj.yFuncts.map(chartObj.max))]);
+    chartObj.yScale = d3.scale.linear().range([chartObj.height, 0]).domain([ (d3.min(chartObj.yFuncts.map(chartObj.min))-0.1), d3.max(chartObj.yFuncts.map(chartObj.max))]);
     console.log();
     chartObj.formatAsYear = d3.format("");
 
@@ -185,7 +188,7 @@ function makeLineChart(dataset, xName, yObjs, axisLables) {
                 let d = x0 - chartObj.xFunct(d0) > chartObj.xFunct(d1) - x0 ? d1 : d0;
             } catch (e) { return;}
             minY = chartObj.height;
-            for (let y  in yObjs) {
+            for (var y  in yObjs) {
                 yObjs[y].tooltip.attr("transform", "translate(" + chartObj.xScale(chartObj.xFunct(d)) + "," + chartObj.yScale(yObjs[y].yFunct(d)) + ")");
                 yObjs[y].tooltip.select("text").text(chartObj.yFormatter(yObjs[y].yFunct(d)));
                 minY = Math.min(minY, chartObj.yScale(yObjs[y].yFunct(d)));
