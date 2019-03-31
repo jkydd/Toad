@@ -1,0 +1,51 @@
+<head>
+<!-- Plotly.js -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    </head>
+
+    <body>
+
+    <div id="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
+<script>
+
+    Plotly.d3.csv("atlas.csv", function(err, array){
+        function unpack(row, key) {
+            console.log("buf",array);
+            console.log(array[23].Elbow_Angle);
+            var unrounded = array[23].Elbow_Angle;
+            var angle_A = Math.round( unrounded * 100 ) / 100;
+            console.log("angle a ", angle_A);
+            return(angle_A);
+        }
+    });
+
+data = [
+    {
+        type: 'scatterpolar',
+        r: [76.16,85.23,80.24,76.16],
+        theta: ['A','B','C','A'],
+        fill: 'toself',
+        name: 'Group A'
+    },
+    {
+        type: 'scatterpolar',
+        r: [80.78,106.84,63.12,80.78],
+        theta: ['A','B','C','A'],
+        fill: 'toself',
+        name: 'Group B'
+    }
+]
+
+layout = {
+    polar: {
+        radialaxis: {
+            visible: true,
+            range: [40, 110]
+        }
+    }
+}
+
+Plotly.plot("myDiv", data, layout, {showSendToCloud: true})
+</script>
+</body>
+
