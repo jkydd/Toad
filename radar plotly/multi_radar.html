@@ -9,14 +9,17 @@
 <script>
 
     Plotly.d3.csv("atlas.csv", function(err, array){
-        function unpack(row, key) {
+        function unpack(row) {
             console.log("buf",array);
-            console.log(array[23].Elbow_Angle);
+            console.log("explicit array" + array[23].Elbow_Angle);
+            console.log("array with variables" + array[row].Elbow_Angle);
             var unrounded = array[23].Elbow_Angle;
             var angle_A = Math.round( unrounded * 100 ) / 100;
             console.log("angle a ", angle_A);
             return(angle_A);
         }
+        var column_name = "Elbow_Angle";
+        unpack(23,column_name);
     });
 
 data = [
