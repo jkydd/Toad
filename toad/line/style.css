@@ -11,11 +11,14 @@ nav{
 .nav-link {
     color:white;
 }
-.upload{
-    margin-right:100px;
+#upload-btn{
+    padding: 30px 115px;
+    border: 1px dashed black;
     color:white;
-    border: 1px solid white;
-    margin-left: 20px;
+}
+.kinematic{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
 }
 .about .nav-link{
     background: transparent;

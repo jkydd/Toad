@@ -33,31 +33,15 @@
                         <div class="row modal-row">
                             <div class="col-lg-12 col-xl-12 col-md-12">
                                 <br>
-                                <h5><b>Summary:</b></h5>
-                                <p>The following plot is a parallel graph consisting of six variables: X position,
-                                    Y position, Z position, Elbow Angle, Humeral Protraction/Retraction, Humeral
-                                    Elevation/Depression. The data was provided by professor Ekstrom, a Wheaton College
-                                    Biology Professor from an experiment testing the differences between a frogs&apos;
-                                    sighted and blinded hops.</p>
-                                <h5><b>File Format:</b></h5>
-                                <p>The uploaded file must be kinematic data provided by Professor Ekstrom, uploaded as a
-                                    CSV file. To create a file from source data, upload a kinematic data file from any of
-                                    the frog&apos;s hops. The file can be of any size and the application will automatically
-                                    clean (scrub) the file to filter any unaccepted data while reading the accepted variables
-                                    for plotting.</p>
-                                <h5><b>Interaction:</b></h5>
-                                <p>Users may select a section of variables by hovering over a variable&apos;s axis, wait for
-                                    the + symbol to show up, then click and drag the section the user wants to select.
-                                    By selecting a section of a variable&apos;s axis, lines that are not selected will turn
-                                    gray while the selected lines will remain green. Selecting multiple variables will
-                                    filter the data so that only hops that satisfy all the selected filters are shown.<br>
-                                    &nbsp; To reset a variable&apos;s selected sections, hover either above or below the selected section,
-                                    wait for the + symbol to show and click. In the case that there is no space on the axis
-                                    to click since the selected section is the entire axis, users will have to reduce
-                                    the size of the selected section size so the cursor may have space to hover over the
-                                    axis directly. This application also supports the option to rearrange the order of the
-                                    axis variables. By hovering over the axis name, such as Z position, users may click and
-                                    drag to rearrange the order of the axes.
+                                <h5><b>Line Graph:kinematic data</b></h5>
+                                <p>The software allows users to upload their own data. When the user generates the
+                                    visualization for the data, there are different graphs displayed. The first graph
+                                    is the jump of the frog using 3D movement data. This allows the user to see the position of the frog in the air over time. The user can also hover on the graph to see the exact X and Y position of the frog at a particular time.</p>
+                                <h5><b>Radar Graph: XYZ points</b></h5>
+                                <p>TThe second graph on the page is a radar chart. This radar chart shows the Elbow Flexion/Extension Angle, Humeral Elevation/Depression Angle, and Humeral Protraction Angle. The radar chart will match the timestamp of the first graph, meaning the radar chart will reflect whichever phase of the jump the frog is on. The change in angle during the jump is shown through the animation of the radar graph as the frog progresses through its jumping phase.</p>
+                                <h5><b>Line Graph: Force plate Data</b></h5>
+                                <p>The third graph is a line graph of the force plate data. The force plate data displays the force exerted when the frog initially jumps and the force exerted when the frog lands. This force plate data is matched and adjusted accordingly to the first graph of the frog jump.
+
                                 <p/>
                             </div>
                         </div>
@@ -110,11 +94,20 @@
         </ul>
     </div>
 </nav>
-<div class="chart-wrapper" id="chart-line1"></div>
+<div class="row justify-content-center" style="margin: 30px 5px 0 5px;">
+    <div class="chart-wrapper col-md-5 col-lg-5" style="margin-right: 5px">
+        <h5 style="color:cornflowerblue; text-align:center; margin: 20px 0 "> Line Graph of Kinematic Data</h5>
+        <div id="chart-line1"></div>
+    </div>
+    <div class="chart-wrapper col-md-5 col-lg-5" style="margin-left: 5px">
+        <h5 style="color:cornflowerblue; text-align:center; margin: 20px 0"> Line Graph of Force Plate Data</h5>
+        <div id="chart-line2"></div>
+    </div>
+</div>
     <?php
         //===================================================================================
         // This is necessary so that the system deletes all the files that previously exist.
-        $folder = 'uploads';
+        $folder = 'uploads/';
         //Get a list of all of the file names in the folder.
         $files = glob($folder . '/*');
 
@@ -223,8 +216,24 @@
                 'Atlas 7': {column: 'Atlas_7'},
                 'Atlas 8': {column: 'Atlas_8'},
                 'Atlas 9': {column: 'Atlas_9'},
-            }, {xAxis: 'Time in milli-second', yAxis: 'Distance in millimeters'});
+            }, {xAxis: 'Time in Millisecond', yAxis: 'Distance in Millimeters'});
             chart.bind("#chart-line1");
+            chart.render();
+        });
+        d3.csv('fortuna_fp.csv', function(error, data) {
+            data.forEach(function (d) {
+                d.timing = +d.timing;
+                d.foreaft = +d.foreaft;
+                d.lateral = +d.lateral;
+                d.normal = +d.normal;
+            });
+            console.log(data);
+            let chart = makeLineChart(data, 'timing', {
+                'Fore-aft': {column: 'foreaft'},
+                'Lateral': {column: 'lateral'},
+                'Normal': {column: 'normal'},
+            }, {xAxis: 'Time in Milliseconds', yAxis: 'Newtons'});
+            chart.bind("#chart-line2");
             chart.render();
         });
     }

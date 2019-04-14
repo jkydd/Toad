@@ -34,31 +34,24 @@
                             <div class="row modal-row upload-modal">
                                 <div class="col-lg-12 col-xl-12 col-md-12">
                                     <br>
-                                    <h5><b>Summary:</b></h5>
-                                    <p>The following plot is a parallel graph consisting of six variables: X position,
-                                        Y position, Z position, Elbow Angle, Humeral Protraction/Retraction, Humeral
-                                        Elevation/Depression. The data was provided by professor Ekstrom, a Wheaton College
-                                        Biology Professor from an experiment testing the differences between a frogs&apos;
-                                        sighted and blinded hops.</p>
-                                    <h5><b>File Format:</b></h5>
-                                    <p>The uploaded file must be kinematic data provided by Professor Ekstrom, uploaded as a
-                                        CSV file. To create a file from source data, upload a kinematic data file from any of
-                                        the frog&apos;s hops. The file can be of any size and the application will automatically
-                                        clean (scrub) the file to filter any unaccepted data while reading the accepted variables
-                                        for plotting.</p>
-                                    <h5><b>Interaction:</b></h5>
-                                    <p>Users may select a section of variables by hovering over a variable&apos;s axis, wait for
-                                        the + symbol to show up, then click and drag the section the user wants to select.
-                                        By selecting a section of a variable&apos;s axis, lines that are not selected will turn
-                                        gray while the selected lines will remain green. Selecting multiple variables will
-                                        filter the data so that only hops that satisfy all the selected filters are shown.<br>
-                                        &nbsp; To reset a variable&apos;s selected sections, hover either above or below the selected section,
-                                        wait for the + symbol to show and click. In the case that there is no space on the axis
-                                        to click since the selected section is the entire axis, users will have to reduce
-                                        the size of the selected section size so the cursor may have space to hover over the
-                                        axis directly. This application also supports the option to rearrange the order of the
-                                        axis variables. By hovering over the axis name, such as Z position, users may click and
-                                        drag to rearrange the order of the axes.
+                                    <h5><b>Line Graph:kinematic data</b></h5>
+                                    <p>The software allows users to upload their own data. When the user generates the
+                                        visualization for the data, there are different graphs displayed. The first graph
+                                        is the jump of the frog using 3D movement data. This allows the user to see the
+                                        position of the frog in the air over time. The user can also hover on the graph
+                                        to see the exact X and Y position of the frog at a particular time.</p>
+                                    <h5><b>Radar Graph: XYZ points</b></h5>
+                                    <p>TThe second graph on the page is a radar chart. This radar chart shows the Elbow
+                                        Flexion/Extension Angle, Humeral Elevation/Depression Angle, and Humeral
+                                        Protraction Angle. The radar chart will match the timestamp of the first graph,
+                                        meaning the radar chart will reflect whichever phase of the jump the frog is on.
+                                        The change in angle during the jump is shown through the animation of the radar
+                                        graph as the frog progresses through its jumping phase.</p>
+                                    <h5><b>Line Graph: Force plate Data</b></h5>
+                                    <p>The third graph is a line graph of the force plate data. The force plate data
+                                        displays the force exerted when the frog initially jumps and the force exerted
+                                        when the frog lands. This force plate data is matched and adjusted accordingly
+                                        to the first graph of the frog jump.
                                     <p/>
                                 </div>
                             </div>
@@ -67,41 +60,23 @@
                     </div>
                 </div>
                 <!--================================= U P L O A D   M O D A L  ======================================-->
-                <button type="button" class="btn btn-primary upload" data-toggle="modal" data-target="#myModal">Upload</button>
-                <div class="modal " id="myModal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">Upload / Manage</h4>
-                                <button type="button" class="close" style="color:black" data-dismiss="modal">&times;</button>
-                            </div>
-                            <!-- Modal body -->
-                            <div class="row modal-row" style="margin-bottom:30px;">
-                                <div class="modal-body col-lg-8 col-xl-8 col-md-8" id="upload-btn">
-                                    <form action="upload.php" method="post" enctype="multipart/form-data">
-                                    <input type="file" name="fileToUpload" id="fileToUpload">
-                                    <input type="submit" value="Generate" name="submit">
-                                </form></div>
-                                <div class="col-lg-4 col-xl-4 col-md-4">
-                                    <label class="checkbox-inline "><input type="checkbox" value="" checked>&nbsp Kinematic</label><br>
-                                    <label class="checkbox-inline disabled"><input type="checkbox" value="">&nbsp Force Plate</label><br>
-                                    <label class="checkbox-inline disabled"><input type="checkbox" value="">&nbsp  Timing of Toad hops</label>
-                                </div>
-                            </div>
-                            <!-- footer -->
-                        </div>
-                    </div>
-                </div>
                 <!--=================================================================================================-->
             </ul>
         </div>
     </nav>
-    <h3 id="header"> Parallel Coordinates (Sample)</h3>
-    <div class="row graphs justify-content-center ">
+    <h3 id="header"> Upload</h3>
+    <div class="row justify-content-center " style="margin-bottom:30px;">
+        <div class=" col-lg-6 col-xl-6 col-md-6" id="upload-btn">
+            <form action="upload.php" method="post" enctype="multipart/form-data">
+                <input type="file" name="fileToUpload" id="fileToUpload">
+                <input type="submit" value="Generate" name="submit">
+            </form></div>
+        <div class="col-lg-2 col-xl-2 col-md-2 kinematic">
+            <label class="checkbox-inline "><input type="checkbox" value="" checked>&nbsp Kinematic</label><br>
+            <label class="checkbox-inline disabled"><input type="checkbox" value="">&nbsp Force Plate</label><br>
+            <label class="checkbox-inline disabled"><input type="checkbox" value="">&nbsp  Timing of Toad hops</label>
+        </div>
     </div>
-    <br>
-    <h2 class="construction" style="color:#116dd2; font-family:Monoton,sans-serif; margin-top:30px; text-align: center"> More Visualization Coming soon!</h2>
-    <div id="modified" style="display:block; margin: 0 auto; width:180px; border:solid 1px gray;padding:10px;"></div>
+
 </body>
 </html>
